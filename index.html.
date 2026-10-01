@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Travel — Экспедиции и Путешествия</title>
+    <style>
+        /* Базовые стили в стиле примера */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fbf9f6; /* Мягкий кремово-белый благородный фон */
+            color: #3a322d;            /* Мягкий тёмно-коричневый для текста */
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Декоративные шрифты для заголовков */
+        h2.section-title {
+            font-family: 'Georgia', serif;
+            font-size: 34px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #5c2c16; /* Бордово-коричневый оттенок */
+            margin-bottom: 30px;
+        }
+
+        /* --- БЛОК 1: О НАC --- */
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            position: relative;
+            margin-bottom: 80px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: #6e6259;
+            margin-bottom: 15px;
+        }
+
+        .about-image-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Элемент декора: тонкие пересекающиеся круги как на референсе */
+        .decor-circles {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(92, 44, 22, 0.15);
+            border-radius: 50%;
+            top: -20px;
+            right: 40px;
+            z-index: 1;
+        }
+        .decor-circles::after {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(92, 44, 22, 0.15);
+            border-radius: 50%;
+            left: 50px;
+            top: 30px;
+        }
+
+        .about-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%; /* Круглая форма фотографии */
+            object-fit: cover;
+            background-color: #ddd;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(92, 44, 22, 0.1);
+        }
+
+        /* --- БЛОК 2: ПУТЁВКИ И НАПРАВЛЕНИЯ --- */
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .tour-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #f0eae1;
+            box-shadow: 0 4px 20px rgba(92, 44, 22, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .tour-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(92, 44, 22, 0.08);
+        }
+
+        .tour-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Круглая мини-превьюшка страны */
+        .tour-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #eae3da;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .tour-name {
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            color: #3a322d;
+            font-weight: bold;
+        }
+
+        .tour-desc {
+            font-size: 13px;
+            color: #9c8e85;
+            margin-top: 2px;
+        }
+
+        /* Круглая изящная кнопка со стрелкой */
+        .arrow-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dcd3c7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5c2c16;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            background: none;
+            cursor: pointer;
+        }
+
+        .arrow-btn:hover {
+            background-color: #5c2c16;
+            color: #ffffff;
+            border-color: #5c2c16;
+        }
+
+        /* --- БЛОК 3: ОТЗЫВЫ --- */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+
+        .review-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #f2ece2;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #6e6259;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #eae3da;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #3a322d;
+        }
+
+        /* --- БЛОК 4: ФОРМА БРОНИРОВАНИЯ --- */
+        .booking-box {
+            background: #ffffff;
+            border: 1px solid #f0eae1;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(92, 44, 22, 0.04);
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid #e3dacd;
+            background-color: #fdfcfb;
+            border-radius: 10px;
+            font-size: 15px;
+            color: #3a322d;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #5c2c16;
+        }
+
+        .submit-btn {
+            background-color: #5c2c16;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #7a3b1e;
+        }
+
+        /* Адаптивность для телефонов */
+        @media (max-width: 768px) {
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .decor-circles {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- РАЗДЕЛ 1: НЕ СКОЛЬКО СЛОВ О НАС -->
+        <section class="about-section">
+            <div class="about-text">
+                <h2 class="section-title">Несколько слов о нас</h2>
+                <p>Идеология идеального приключения складывается из жажды открытий, первозданной природы и людей, которые нас окружают. Наш приоритет — создавать уникальные экспедиционные маршруты для искателей истинных эмоций.</p>
+                <p>ADVENTURE TRAVEL — это не просто туризм, а погружение в культуру. За одну поездку с нами вы сможете покорить горные хребты, изучить потаенные уголки островов и полностью перезагрузиться.</p>
+            </div>
+            <div class="about-image-container">
+                <div class="decor-circles"></div>
+                <!-- Замени смайлик внутри src на URL реальной картинки путешествий -->
+                <img class="about-img" src="https://unsplash.com" alt="Adventure">
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛ 2: ПУТЁВКИ / УСЛУГИ -->
+        <section style="margin-bottom: 60px;">
+            <h2 class="section-title" style="text-align: center;">Направления экспедиций</h2>
+            <div class="tours-grid">
+                
+                <!-- Карточка 1: Турция -->
+                <div class="tour-item">
+                    <div class="tour-info">
+                        <div class="tour-avatar">🏔️</div>
+                        <div>
+                            <div class="tour-name">Каппадокия  Ликийская тропа</div>
+                            <div class="tour-desc">Турция • Отели 4-5* • Трекинг</div>
+                        </div>
+                    </div>
+                    <a href="#book" class="arrow-btn">→</a>
+                </div>
+
+                <!-- Карточка 2: Таиланд -->
+                <div class="tour-item">
+                    <div class="tour-info">
+                        <div class="tour-avatar">🌴</div>
+                        <div>
+                            <div class="tour-name">Дикие острова  Джунгли</div>
+                            <div class="tour-desc">Таиланд • Бунгало у воды • Каякинг</div>
+                        </div>
+                    </div>
+                    <a href="#book" class="arrow-btn">→</a>
+                </div>
+
+                <!-- Карточка 3: Восхождения -->
+                <div class="tour-item">
+                    <div class="tour-info">
+                        <div class="tour-avatar">⛺</div>
+                        <div>
